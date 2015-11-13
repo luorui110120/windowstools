@@ -150,6 +150,10 @@ int CGetsignDlg::getApkSign(char *ApkPath, unsigned char **ppOut)
 					if(pBuf[0x36 + ECsigoffset + 2] >= 0x80)
 					{
 						ECsigoffset += 3;
+						while(pBuf[0x36 + ECsigoffset] >= 0x80)
+						{
+							ECsigoffset ++;
+						}
 						nSiglen = pBuf[0x36 + ECsigoffset] * 0x100 + pBuf[0x37 + ECsigoffset];
 					}
 					if(nSiglen < ze.unc_size - 0x36 - ECsigoffset)
